@@ -1,0 +1,38 @@
+
+
+
+
+    #error-404 {
+        width: 100%;
+       max-height:100vh !important;
+      //
+
+        .content {
+            width: 90%;
+            margin: 100px auto;
+            max-width: 512px !important;
+            
+            .error-code {
+                // margin:100px auto;
+                font-size: 112px;
+                text-align: center;
+                line-height: 1;
+                margin-bottom: 16px;
+                font-weight: 600;
+            }
+
+            .message {
+                font-size: 24px;
+                text-align: center;
+                line-height: 2;
+            }
+
+
+
+            .back-link {
+                font-size: 15px;
+                text-align: center;
+            }
+        }
+    }
+

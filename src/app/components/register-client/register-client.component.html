@@ -1,0 +1,99 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoadingSpanner"></mat-spinner>
+  <form action="" #userRegister="ngForm" (submit)="addUser(userRegister)" *ngIf="!isLoadingSpanner">
+    <!-- name -->
+    <mat-form-field>
+
+      <input type="text" matInput name="name" [ngModel]="user?.name" placeholder="name if user" required #name="ngModel"
+        minlength="3">
+      <mat-error *ngIf="name.invalid">please enter name</mat-error>
+    </mat-form-field>
+    <!-- **************************** -->
+
+    <mat-form-field>
+      <input type="date" matInput [ngModel]="user?.dateOfBirth" #dateOfBirth="ngModel" name="dateOfBirth" required
+        placeholder="dateOfBirth ">
+      <mat-error *ngIf="dateOfBirth.invalid">please enter dateOfBirth</mat-error>
+    </mat-form-field>
+    <!-- ******************************** address **************-->
+    <mat-form-field>
+      <input type="text" matInput [ngModel]="user?.address" #address="ngModel" name="address" placeholder="address">
+    </mat-form-field>
+    <!-- *****************************   Gender ****************** -->
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select name="gender" [ngModel]="user?.gender" #gender="ngModel" required>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+      </mat-select>
+      <mat-error *ngIf="gender.invalid">please enter name</mat-error>
+    </mat-form-field>
+    <!-- ************************** jobDescription *******************   -->
+    <mat-form-field>
+      <textarea matInput rows="10" [ngModel]="user?.jobDescription" #jobDescription="ngModel" name="jobDescription"
+        maxlength="300" minlength="50" placeholder="jobDescription"></textarea>
+      <mat-error *ngIf="jobDescription.invalid">
+        <p class="" *ngIf="jobDescription.errors?.['minlength']">
+          jobDescription is minlength 50 char
+        </p>
+        <p class="" *ngIf="jobDescription.errors?.['maxlength']">
+          jobDescription is maxlength 300 char
+        </p>
+      </mat-error>
+    </mat-form-field>
+    <!-- ************************* phonenumber ********************* -->
+    <mat-form-field appearance="outline">
+      <input type="text" matInput required digits minlength="10" maxlength="15" [ngModel]="user?.phoneNumber"
+        #phonenumber="ngModel" name="phonenumber" placeholder="phoneNumber">
+      <!-- phone="SY"-->
+      <mat-error *ngIf="phonenumber.invalid">
+        <!-- phonenumber.errors?.phone&& -->
+        <!-- <p *ngIf="phonenumber.errors?.digits">
+          phoneNumber Only
+        </p> -->
+        <p *ngIf="phonenumber.errors?.maxlength||phonenumber.errors?.minlength ">
+          phoneNumber should be range 10 to 15 number
+        </p>
+      </mat-error>
+    </mat-form-field>
+    <!-- ************************ Email ***************************** -->
+    <mat-form-field appearance="outline">
+      <input type="email" matInput email [ngModel]="user?.email" #email="ngModel" name="email" placeholder="email">
+
+      <mat-error *ngIf="email.invalid">
+
+        <p *ngIf="email.errors?.email">
+          please valid email input
+        </p>
+      </mat-error>
+    </mat-form-field>
+    <!-- ******************************** jobInterested *********** -->
+    <mat-card-content>
+      <h4>chose jobListInterested</h4>
+      <section class="example-section" *ngFor="let item of jobListInterested">
+        <p>
+          <mat-checkbox name="{{item.name}}" (change)="onChangeSelected()" [(ngModel)]="item.isSelected"> {{item.name}}
+          </mat-checkbox>
+        </p>
+      </section>
+    </mat-card-content>
+<!-- ************************************ file image ********* -->
+    <div class="">
+      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+      <div class="file-upload">
+        {{fileName || "No file uploaded yet."}}
+        <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </div>
+    </div>
+
+
+    <mat-action-row>
+      <button mat-raised-button color="primary" type="submit">Send Data</button>
+
+    </mat-action-row>
+
+  </form>
+
+</mat-card>

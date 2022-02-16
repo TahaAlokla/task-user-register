@@ -1,0 +1,52 @@
+
+<nav class="navbar navbar-expand-md  fixed-top navbar-light bg-light mb-5 mb-lg-5 py-4 fw-bolder text-dark uk-box-shadow-medium">
+
+  <div class="container text-center">
+    <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+      <!-- <span class="navbar-toggler-icon"></span> -->
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="">
+
+        <ul class="navbar-nav me-auto mb-2 mb-md-0 text-dark">
+
+          <li class="nav-item px-2" *ngIf="isLoggedInAdmin$| async">
+
+            <a
+             class="nav-link text-dark"
+             routerLink='/admin'>
+             {{linksName.adminControls}}</a>
+
+          </li>
+
+
+          <li class="nav-item px-2"><a
+            class="nav-link text-dark"
+             routerLink='/home'> {{linksName.home}}</a></li>
+
+          <li class="nav-item px-2">
+            <a  class="nav-link"
+            routerLink='/users'>{{linksName.usersTable}}</a>
+          </li>
+
+              <li class="nav-item px-3"  *ngIf="isLoggedIn$ | async">
+                <a  class="text-decoration-none text-danger nav-link"
+                (click)="logout()">{{linksName.sinOut}}</a>
+              </li>
+              <!--  *ngIf="!isLoggedIn$ -->
+              <li class="nav-item px-3" *ngIf="!(isLoggedIn$ | async)" >
+                <a  class="text-decoration-none text-danger nav-link"
+                routerLink='/login'
+                >{{linksName.login}}</a>
+              </li>
+
+
+
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+</nav>
