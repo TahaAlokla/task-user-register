@@ -1,1 +1,210 @@
+<div class="section-user-body  w-auto py-2 px-2 h-auto">
 
+
+  <hr>
+  <div class="row">
+    <div class="col d-flex ">
+      <button class="btn-lg btn-success" data-bs-target="#AddServiceModal" data-bs-toggle="modal">اضافة مستخدم
+        جديد</button>
+    </div>
+  </div>
+
+
+
+    <div class="modal fade" id="AddServiceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header ">
+
+            <p class="modal-title lead fw-bold text-info center" id="exampleModalLabel">إضافة مستخدم جديد
+            </p>
+
+          </div>
+          <div class="modal-body ">
+
+            <div class=" p-3 ">
+               <mat-spinner *ngIf="isLoadingSpanner"></mat-spinner>
+              <form #userRegister="ngForm" (submit)="addUser(userRegister)" *ngIf="!isLoadingSpanner">
+
+                <!--!==========================  name filed  -->
+                <div class="uk-inline uk-width-1-1">
+                  <p class="   uk-text-lead  text-info float-right">اسم المستخدم</p>
+
+                  <input type="text" class="uk-textarea  uk-padding-small my-1" rows="5" name="name"
+                    [ngModel]="user?.name" placeholder="name if user" required #name="ngModel" minlength="3"
+                    placeholder="اسم المستخدم">
+                  <div class="uk-alert-danger py-1 my-1" uk-alert *ngIf="name.errors && userRegister.submitted">
+                    <p class="lead uk-text-right" *ngIf="name.errors.required">
+                      الاسم مطلوب
+                    </p>
+                    <p class="lead uk-text-right" *ngIf="name.errors. minlength">
+                      يجب أن تحقق عدد كلمات كافية
+                    </p>
+                  </div>
+                </div>
+                <!-- !================================== Job Description  -->
+                <div class="uk-inline uk-width-1-1">
+                  <p class="   uk-text-lead  text-info float-right">الوصف الوظيفي</p>
+
+                  <textarea type="text" class="uk-textarea  uk-padding-small my-1" rows="5"
+                    [ngModel]="user?.jobDescription" #jobDescription="ngModel" name="jobDescription" maxlength="300"
+                    minlength="50" required placeholder="الوصف الوظيفي"></textarea>
+
+                  <div class="uk-alert-danger py-1 my-1" uk-alert
+                    *ngIf="jobDescription.errors && userRegister.submitted">
+                    <p class="lead uk-text-right" *ngIf="jobDescription.errors.required">
+                      الوصف الوظيفي مطلوب
+                    </p>
+                    <p class="lead uk-text-right"
+                      *ngIf="jobDescription.errors.minlength||jobDescription.errors.maxlength">
+                      يجب أن لا تقل عدد الحروف عن 50 ولا تزيد عن 300
+                    </p>
+                  </div>
+                </div>
+                <!-- !============================ Address =========== -->
+                <div class="uk-inline uk-width-1-1">
+                  <p class="uk-text-lead  text-info float-right">العنوان</p>
+                  <input type="text" class="uk-textarea  uk-padding-small" rows="5" [ngModel]="user?.address"
+                    #address="ngModel" name="address" placeholder="العنوان">
+                </div>
+                <!-- ! ================= Gender -->
+                <div class="uk-margin-small-bottom">
+                  <div class=" uk-width-1-1 ">
+                    <p class=" text-info uk-margin-small  uk-text-lead uk-text-right"> الجنس</p>
+                    <select class="align-middle my-1" name="gender" [ngModel]="user?.gender" #gender="ngModel" required
+                      class="uk-select text-info style-select">
+                      <option *ngFor="let item of  Genders" [value]="item">
+                        {{item}}
+                      </option>
+                    </select>
+                    <div class="uk-alert-danger py-1 my-1" uk-alert *ngIf="gender.errors && userRegister.submitted">
+                      <p class="lead uk-text-right">أختيار الجنس مطلوب </p>
+                    </div>
+
+                  </div>
+                </div>
+                <!--!================================= Email================ -->
+                <div class="">
+                  <div class="uk-inline uk-width-1-1">
+                    <p class=" text-info uk-margin-small  uk-text-lead  float-right">البريد الألكتروني</p>
+
+                    <!-- input password filed -->
+                    <input class="uk-input uk-form-large uk-placeholder my-1" type="email" email required email
+                      [ngModel]="user?.email" #email="ngModel" name="email" placeholder="البريد الألكتروني">
+                  </div>
+
+                  <div class="uk-alert-danger py-1 my-1" uk-alert *ngIf="email.errors && userRegister.submitted">
+                    <div class="" *ngIf="email.errors.required">
+                      <p class="lead uk-text-right">
+                        البريد الألكتروني مطلوب
+                      </p>
+                    </div>
+                    <p class="lead uk-text-right " *ngIf="email.errors?.email">
+                      إدخال صيغة ايميل صالحة
+                    </p>
+                  </div>
+                </div>
+                <!--!======================== phone number input =============-->
+                <div class="">
+                  <div class="uk-inline uk-width-1-1">
+                    <!--   رقم الهاتف  -->
+                    <p class=" text-info uk-margin-small  uk-text-lead float-right "> رقم الهاتف</p>
+                    <input class="uk-input uk-form-large uk-placeholder my-1" type="tel" required
+                      placeholder="رقم الهاتف" minlength="10" maxlength="15" [ngModel]="user?.phoneNumber"
+                      #phonenumber="ngModel" name="phonenumber">
+                  </div>
+                  <!--* check phone number filed  -->
+                  <div class="uk-alert-danger py-1 my-1" uk-alert *ngIf="phonenumber.errors && userRegister.submitted">
+                    <div *ngIf="phonenumber.errors.required">
+                      <p class="lead uk-text-right ">
+                        رقم الهاتف مطلوب
+                      </p>
+                    </div>
+                    <div *ngIf="phonenumber.errors.minlength||phonenumber.errors.maxlength">
+                      <p class="lead uk-text-right">
+                        رقم الهاتف15 -,10 ارقام بدون رمز دولي
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- !======================= مجالات العمل ======= -->
+                <div class="">
+                  <p class=" text-info uk-margin-small  uk-text-lead uk-text-right ">مجالات العمل المهتم بها </p>
+                  <section class="example-section uk-text-right" *ngFor="let item of jobListInterested">
+                    <p>
+                      <mat-checkbox name="{{item.name}}" (change)="onChangeSelected()" [(ngModel)]="item.isSelected">
+                        {{item.name}}
+                      </mat-checkbox>
+                    </p>
+                  </section>
+                  <!--  []===1 && userRegister.submitted" -->
+                  <div class="uk-alert-danger py-1 my-1" uk-alert
+                    *ngIf="requiredSelectedLength===0&&userRegister.submitted">
+                    <p class="lead uk-text-right">
+                      يجب تحديد خيار واحد على الاقل
+                    </p>
+                  </div>
+                </div>
+                <!--!=======================File iMage ============== -->
+                <div class="uk-margin-small">
+
+                  <div class="uk-margin-small">
+
+                    <div class="uk-inline uk-width-1-1">
+                      <p class="uk-text-right uk-margin-small-bottom  uk-text-lead  text-info">رفع صورة الشخصية
+                      </p>
+                      <label class="uk-form-label uk-margin-small float-right" for="form-stacked-text">
+                        تأكد من ان الملف المرفوع هو بصيغة من إحدى صيغ الصور
+                      </label>
+                      <div>
+
+
+                        <input type="file" id="file-upload" style="display:none;" (change)="onFileSelected($event)"
+                          #fileUpload>
+                        <button type="button" class="uk-button uk-button-default" (click)="fileUpload.click()">اضغط لرفع
+                          الصورة </button>
+
+                        <p class="d-flex">
+                          {{fileName || "لا توجد صورة مرفوعة"}}
+                        </p>
+                      </div>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+                <!-- !============================= submit button ====== -->
+                <div class="my-2 d-flex">
+                  <button class="btn-lg btn-success "
+                  type="submit"
+                    >ارسال</button>
+                </div>
+
+
+              </form>
+              <!-- * massages  -->
+               <div class=""*ngIf="massageSendingForm">
+                <div class="alert alert-defult" *ngIf="massageSendingForm">
+                  <p>{{massageSendingForm}}</p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-danger text-center h4" data-bs-dismiss="modal">أغلاق النافذة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+</div>

@@ -1,7 +1,8 @@
+import { User } from './../../interfaces/user';
 import { Component, OnInit } from '@angular/core';
-import { FaqUser } from 'src/app/faq.user';
-import { Subscription } from 'rxjs';
-import { User } from 'src/app/interfaces/user';
+
+import { Subscription, Observable } from 'rxjs';
+
 import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-users',
@@ -12,22 +13,26 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService:UsersService) {
     this.dataSource = []as User[]
-  }
 
+  }
   userSub: Subscription | undefined;
    usersList:User[]|undefined;
     dataSource :User[]
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+     displayedColumns: string[] = ['name', 'address', 'email'];
 
   ngOnInit(): void {
-    this.userSub = this.userService.getUserUpDateListener().subscribe((users:User[])=>{
-      this.usersList = users
-      console.log('users',this.usersList);
 
-      this.dataSource = users
+    console.log();
+
+    this.userSub = this.userService.getUserUpDateListener().subscribe((usersData)=>{
+      console.log('test users component !!',usersData);
+      this.usersList = usersData
+      // console.log('users',this.usersList);
+      this.dataSource = usersData
+    },err=>{
+      console.log(err);
+
     })
-
-
   }
 
 

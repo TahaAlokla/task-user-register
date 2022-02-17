@@ -1,10 +1,10 @@
-import { jobInterested } from './../interfaces/user';
+import { jobInterested, User } from './../interfaces/user';
 import { AuthServiceService } from './auth-service.service';
 import { StorageUserService } from './storge-user.service';
 import { FaqUser } from 'src/app/faq.user';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
-import { BehaviorSubject, Subject } from 'rxjs';
+
+import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class UsersService {
   constructor(private FaqUser: FaqUser, private StorageUser: StorageUserService, private authService: AuthServiceService, private router: Router) { }
 
 
-  private users: User[] = [
+   users: User[] = [
     {
       name: 'taha',
       dateOfBirth: '2022-11-1',
@@ -29,14 +29,15 @@ export class UsersService {
       id: '123456'
     }
   ]
-  private userUpdate = new Subject<User[]>()
+ userUpdate = new Subject<User[]>()
   //
   getUserUpDateListener() {
     return this.userUpdate.asObservable()
   }
-  //  console.log(ARG[0]);
+
+
   addUser(...params: any) {
-    // console.log(jobInterested);
+
     const newUser: User = {
       name: params[0],
       email: params[1],
@@ -51,12 +52,13 @@ export class UsersService {
     }
     console.log(newUser);
     this.users.push(newUser)
-    this.userUpdate.next([...this.users])
-    this.router.navigate(['/users'])
+    console.log('this.users array',this.users);
 
-    // console.log(params[0]);
-    //  console.log(params);
-    //  this.users.push()
+    this.userUpdate.next([...this.users])
+
+    // this.router.navigate(['/users'])
+
+
   }
 
 
