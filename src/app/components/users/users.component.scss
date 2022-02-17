@@ -1,3 +1,24 @@
 table {
-  width: 100%;
+  width: 70%;
+  margin: auto !important;
+  text-align: center !important;
+}
+
+.filter{
+  width:70%;
+  // float: right;
+  // margin-right: 300px;
+outline: none !important;
+.input-form:focus{
+  outline: none !important;
+  background-color: transparent;
+  border: none !important;
+}
+font-size: 25pxS;
+  margin: auto !important;
+}
+
+.mat-sort-header-container{
+  display: flex;
+  justify-content:center !important
 }

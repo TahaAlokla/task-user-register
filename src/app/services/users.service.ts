@@ -27,6 +27,17 @@ export class UsersService {
       email: 'taha.com',
       jobInterestedSelected: ['websites'],
       id: '123456'
+    },
+    {
+      name: 'mohammad',
+      dateOfBirth: '2022-11-1',
+      phoneNumber: '096800000',
+      address: '',
+      jobDescription: 'bbbbbbbbbbbb',
+      gender: 'male',
+      email: 'mmm.com',
+      jobInterestedSelected: ['websites','moblileApps'],
+      id: '1111'
     }
   ]
  userUpdate = new Subject<User[]>()
@@ -35,7 +46,9 @@ export class UsersService {
     return this.userUpdate.asObservable()
   }
 
-
+getUsers():User[]{
+  return this.users
+}
   addUser(...params: any) {
 
     const newUser: User = {

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterClientComponent } from './components/register-client/register-client.component';
+
 import { UsersComponent } from './components/users/users.component';
 import { Page404Component } from './components/page404/page404.component';
 import { AdminModuleModule } from './modules/admin-module/admin-module.module';
@@ -22,7 +22,6 @@ import { CustomFormsModule } from 'ng2-validation'
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterClientComponent,
     UsersComponent,
     Page404Component,
     HomeComponent,

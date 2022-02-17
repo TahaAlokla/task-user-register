@@ -98,7 +98,7 @@ export class AdminBoardComponent implements OnInit {
    this.isLoadingSpanner = true
   this.massageSendingForm="تم ارسال المعلومات "
     userRegister.resetForm()
-    this.ngOnInit()
+
 
     } else {
       // this.isLoadingSpanner = true

@@ -4,7 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminModuleModule } from './modules/admin-module/admin-module.module';
 import { UsersComponent } from './components/users/users.component';
-import { RegisterClientComponent } from './components/register-client/register-client.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { Page404Component } from './components/page404/page404.component';
 import { NgModule } from '@angular/core';
@@ -18,11 +18,7 @@ const routes: Routes = [
   canActivate: [AuthGuard],
    component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  {
-    path: 'register-client',
-    canActivate: [AuthGuard],
-    component: RegisterClientComponent
-  },
+
   {
     path: 'users',
     canActivate: [AuthGuard],
