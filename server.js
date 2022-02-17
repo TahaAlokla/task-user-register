@@ -13,7 +13,7 @@ app.use(requireHTTPS);
 app.use(express.static('./dist/tomorrow-solution-app'));
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: 'dist/Mihin-app/'}),
+  res.sendFile('index.html', {root: 'dist/tomorrow-solution-app/'}),
 );
 
 app.listen(process.env.PORT || 8080);
